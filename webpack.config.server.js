@@ -7,7 +7,7 @@ const config = {
     name: 'server',
     target: 'node',
     entry: [
-        path.joined(CURRENT_WORKING_DIR, "/server/server.js")
+        path.join(CURRENT_WORKING_DIR, "/server/server.js")
     ],
     output: {
         path: path.join(CURRENT_WORKING_DIR, "/dist/"),
