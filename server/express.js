@@ -51,8 +51,24 @@ app.use((err, req, res, next) => {
 app.get("*", (req, res) => {
     const sheets = new ServerStyleSheets();
     const context = {};
+    const markup = ReactDOMServer.renderToString(
+        sheets.collect(
+            <StaticRouter location={ req.url } context={ context }>
+                <ThemeProvider theme={ theme }>
+                    <MainRouter />
+                </ThemeProvider>
+            </StaticRouter>
+        )
+    );
 
-    res.send(Template());
+    if (context.url) {
+        return res.redirect(303, context.url);
+    }
+    const css = sheets.toString();
+    return res.status(200).send(Template({
+        markup: markup,
+        css: css
+    }));
 });
 
 export default app;
