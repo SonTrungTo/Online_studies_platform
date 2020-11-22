@@ -1,6 +1,9 @@
 import User from "../models/user.model";
 import dbErrorHandler from "../helpers/dbErrorHandler";
 import extend from "lodash/extend";
+import formidable from "formidable";
+import fs from "fs";
+import defaultUser from "../../client/assets/images/defaultPhoto.png";
 
 const list = async (req, res) => {
     try {
@@ -34,18 +37,32 @@ const read = (req, res) => {
 };
 
 const update = async (req, res) => {
-    try {
-        const user = extend(req.profile, req.body);
+    const form = new formidable.IncomingForm();
+    form.keepExtensions = true;
+    form.parse(req, async (err, fields, files) => {
+        if (err) {
+            return res.status(400).json({
+                error: "Could not fetch the form"
+            });
+        }
+        const photo = req.profile.photo;
+        const user = extend(req.profile, {...fields, photo: photo});
         user.updated = Date.now();
-        await user.save();
-        user.salt = undefined;
-        user.hashed_password = undefined;
-        return res.status(200).json(user);
-    } catch (err) {
-        return res.status(400).json({
-            error: dbErrorHandler.getErrorMessage(err)
-        });
-    }
+        if (files.photo) {
+            user.photo.data = fs.readFileSync(files.photo.path);
+            user.photo.contentType = files.photo.type;
+        }
+        try {
+            await user.save();
+            user.salt = undefined;
+            user.hashed_password = undefined;
+            return res.status(200).json(user);
+        } catch (err) {
+            return res.status(400).json({
+                error: dbErrorHandler.getErrorMessage(err)
+            });
+        }
+    });
 };
 
 const remove = async (req, res) => {
@@ -59,6 +76,17 @@ const remove = async (req, res) => {
             error: dbErrorHandler.getErrorMessage(err)
         });
     }
+};
+
+const photo = async (req, res, next) => {
+    if (req.profile.photo.data) {
+        
+    }
+    next();
+};
+
+const defaultPhoto = async (req, res) => {
+
 };
 
 const userById = async (req, res, next, id) => {
@@ -79,5 +107,6 @@ const userById = async (req, res, next, id) => {
 };
 
 export default {
-    list, create, userById, read, update, remove
+    list, create, userById, read, update, remove, photo,
+    defaultPhoto
 };
