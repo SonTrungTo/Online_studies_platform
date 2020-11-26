@@ -78,15 +78,16 @@ const remove = async (req, res) => {
     }
 };
 
-const photo = async (req, res, next) => {
+const photo = (req, res, next) => {
     if (req.profile.photo.data) {
-        
+        res.set('Content-Type', req.profile.photo.contentType);
+        return res.send(req.profile.photo.data);
     }
     next();
 };
 
-const defaultPhoto = async (req, res) => {
-
+const defaultPhoto = (req, res) => {
+    return res.sendFile(process.cwd()+defaultUser);
 };
 
 const userById = async (req, res, next, id) => {
