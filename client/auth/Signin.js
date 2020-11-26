@@ -32,10 +32,10 @@ const useStyles = makeStyles(theme => ({
     },
     submit: {
         margin: 'auto',
-        backgroundColor: theme.palette.openTitle,
+        backgroundColor: theme.palette.secondary.dark,
         marginTop: theme.spacing(3),
         '&:hover': {
-            backgroundColor: theme.palette.secondary.dark
+            backgroundColor: theme.palette.openTitle
         }
     }
 }));
