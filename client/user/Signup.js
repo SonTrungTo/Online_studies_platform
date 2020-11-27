@@ -37,7 +37,18 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
             backgroundColor: theme.palette.openTitle
         },
-        marginTop: theme.spacing(3)
+        marginTop: theme.spacing(3),
+        color: theme.palette.primary.contrastText
+    },
+    error: {
+        marginRight: theme.spacing(2)
+    },
+    signInButton: {
+        backgroundColor: theme.palette.secondary.dark,
+        "&:hover": {
+            backgroundColor: theme.palette.openTitle
+        },
+        color: theme.palette.primary.contrastText
     }
 }));
 
@@ -101,8 +112,11 @@ export default function Signup() {
                         <br />
                     </div>
                     { values.error && (
-                        <Typography component="p">
-
+                        <Typography component="p" color="error">
+                            <Icon color="error" className={ classes.error }>
+                                <Error />
+                            </Icon>
+                            { values.error }
                         </Typography>
                     ) }
                     <CardActions>
@@ -113,6 +127,24 @@ export default function Signup() {
                     </CardActions>
                 </CardContent>
             </Card>
+            <Dialog open={ values.open } disableBackdropClick={ true }>
+                <DialogContent>
+                    <DialogTitle>
+                        Account created!
+                    </DialogTitle>
+                    <DialogContentText>
+                        New account has been created!
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Link to="/signin">
+                        <Button className={ classes.signInButton }
+                        variant="contained">
+                            Sign In
+                        </Button>
+                    </Link>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
