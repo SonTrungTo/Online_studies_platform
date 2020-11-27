@@ -77,7 +77,7 @@ const Menu = withRouter(({history}) => {
                             <Button onClick={ () => auth.clearJWT(() => {
                                 history.push("/");
                             }) }
-                            color="inherit">
+                            color="default">
                                 Sign Out
                             </Button>
                         </span>
