@@ -97,7 +97,7 @@ export default function Users() {
             <List dense>
                 { usersToShow.map(user => {
                     const photoUrl
-                    = `/api/users/photo/${user._id}${new Date().getTime()}`;
+                    = `/api/users/photo/${user._id}?${new Date().getTime()}`;
                     return (
                     <Link to={"/user/" + user._id} key={ user._id }>
                         <ListItem>
