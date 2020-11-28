@@ -13,9 +13,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import { makeStyles, fade } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
-import { values } from "lodash";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -83,17 +81,16 @@ export default function Users() {
 
     return (
         <Paper elevation={ 4 } className={ classes.root }>
-            
             <Typography variant="h6" className = { classes.title }>
                 All Users
             </Typography>
-            <span className={ classes.search }>
+            <div className={ classes.search }>
                 <span className={ classes.searchIcon }>
                     <SearchIcon />
                 </span>
-                <InputBase placeholder="Search..." 
+                <input placeholder="Search..." 
                 value={ newUser } onChange={ handleChangeUser } />
-            </span>
+            </div>
             <List dense>
                 { usersToShow.map(user => {
                     const photoUrl

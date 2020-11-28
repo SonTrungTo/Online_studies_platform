@@ -14,9 +14,23 @@ import { read } from "./api-user";
 import Divider from "@material-ui/core/Divider";
 import auth from "../auth/auth-helper";
 import { Link } from "react-router-dom";
+import { Icon, Typography } from "@material-ui/core";
+import ErrorIcon from "@material-ui/icons/Error";
 
 const useStyles = makeStyles(theme => ({
-
+    error: {
+        marginRight: theme.spacing(2)
+    },
+    bigAvatar: {
+        width: 60,
+        height: 60,
+        margin: 10
+    },
+    title: {
+        padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px
+        ${theme.spacing(2)}px`,
+        color: theme.palette.primary.dark
+    }
 }));
 
 export default function Profile(props) {
@@ -47,19 +61,50 @@ export default function Profile(props) {
 
     return (
         <Paper elevation={ 4 }>
+            <Typography variant="h6" className={ classes.title }>
+                Profile
+            </Typography>
             <List>
                 <ListItem>
                     <ListItemAvatar>
                         <Avatar
-                        src={ photoUrl } />
+                        src={ photoUrl } className={ classes.bigAvatar } />
                     </ListItemAvatar>
                     <ListItemText primary={ values.profileUser.name }
                     secondary={ values.profileUser.email } />
-                    { jwt.user && (
+                    { jwt.user && 
+                    jwt.user._id === values.profileUser._id && (
                     <ListItemSecondaryAction>
-                        
+                        <Link to={ "/user/edit/" + jwt.user._id }>
+                            <IconButton color="secondary"
+                            aria-label="Edit">
+                                <Edit />
+                            </IconButton>
+                        </Link>
+                        <IconButton color="primary">
+                            <Delete />
+                        </IconButton>
                     </ListItemSecondaryAction>
                     ) }
+                </ListItem>
+                { values.error &&
+                <ListItem>
+                    <ListItemText primary={
+                        <Typography component="p" color="error">
+                            <Icon color="error" className={ classes.error }>
+                                <ErrorIcon />
+                            </Icon>
+                        </Typography>
+                    } />
+                </ListItem> }
+                <ListItem>
+                    <ListItemText primary={ values.profileUser.about } />
+                </ListItem>
+                <Divider />
+                <ListItem>
+                    <ListItemText primary={ 
+                        "Joined: " + new Date(values.profileUser.created).toDateString()
+                    } />
                 </ListItem>
             </List>
         </Paper>
