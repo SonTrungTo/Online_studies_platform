@@ -9,7 +9,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import Edit from "@material-ui/icons/Edit";
-import Delete from "@material-ui/icons/Delete";
+import DeleteProfile from "./DeleteProfile";
 import { read } from "./api-user";
 import Divider from "@material-ui/core/Divider";
 import auth from "../auth/auth-helper";
@@ -41,7 +41,9 @@ export default function Profile(props) {
     });
     const jwt = auth.isAuthenticated();
     const photoUrl
-    = `/api/users/photo/${values.profileUser._id}?${new Date().getTime()}`;
+    = values.profileUser._id ?
+    `/api/users/photo/${values.profileUser._id}?${new Date().getTime()}` : 
+    `/api/users/defaultPhoto`;
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -81,9 +83,7 @@ export default function Profile(props) {
                                 <Edit />
                             </IconButton>
                         </Link>
-                        <IconButton color="primary">
-                            <Delete />
-                        </IconButton>
+                        <DeleteProfile userId={ jwt.user._id } history={ props.history } />
                     </ListItemSecondaryAction>
                     ) }
                 </ListItem>

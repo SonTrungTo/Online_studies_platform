@@ -24,7 +24,7 @@ const clearJWT = (cb) => {
         sessionStorage.removeItem('jwt');
     }
     cb();
-    signout.then(data => {
+    signout().then(data => {
         data.cookie = 't=; expires=Thur, 01 Jan 1970 00:00:00 UTC;' +
         'path=/;';
     });
