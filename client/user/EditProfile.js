@@ -12,6 +12,8 @@ import ErrorIcon from "@material-ui/icons/Error";
 import { Redirect } from "react-router-dom";
 import { read, update } from "./api-user";
 import auth from "../auth/auth-helper";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -61,6 +63,10 @@ const useStyles = makeStyles(theme => ({
         margin: 'auto',
         marginTop: theme.spacing(1),
         marginBottom: theme.spacing(1)
+    },
+    subHeading: {
+        marginTop: theme.spacing(2),
+        color: theme.palette.primary.main
     }
 }));
 
@@ -98,6 +104,10 @@ export default function EditProfile() {
         setProfileUser({...profileUser, [name]: value});
     };
 
+    const handleChecked = (event, checked) => {
+        setProfileUser({...profileUser, 'educator': checked});
+    };
+
     const clickSubmit = () => {
         const form = new FormData();
         profileUser.name && form.append('name', profileUser.name);
@@ -108,6 +118,7 @@ export default function EditProfile() {
         && form.append('retypePassword', profileUser.retypePassword);
         profileUser.about && form.append('about', profileUser.about);
         profileUser.photo && form.append('photo', profileUser.photo);
+        profileUser.educator && form.append('educator', profileUser.educator);
 
         update({
             userId: jwt.user._id
@@ -115,7 +126,9 @@ export default function EditProfile() {
             if (data.error) {
                 setErrorMessage(data.error);
             } else {
-                setRedirectToProfile(true);
+                auth.updateUser(data, () => {
+                    setRedirectToProfile(true);
+                });
             }
         });
     };
@@ -170,6 +183,20 @@ export default function EditProfile() {
                     <TextField label="Confirm password" id="retypePassword"
                     value={ profileUser.retypePassword } type="password"
                     onChange={ handleChange("retypePassword") } />
+                    <br />
+                    <Typography variant="subtitle1" className={ classes.subHeading }>
+                        I am an Educator
+                    </Typography>
+                    <FormControlLabel control={
+                        <Switch className={{
+                            checked: classes.checked,
+                            bar: classes.bar
+                        }}
+                        checked={ Boolean(profileUser.educator) }
+                        onChange={ handleChecked }
+                        />
+                    }
+                    label={ profileUser.educator ? "Yes" : "No" } />
                     <br />
                 </div>
                 { errorMessage &&

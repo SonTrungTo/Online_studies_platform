@@ -7,6 +7,17 @@ const authenticate = (jwt, cb) => {
     cb();
 };
 
+const updateUser = (user, cb) => {
+    if (typeof window !== 'undefined') {
+        if (sessionStorage.getItem('jwt')) {
+            const auth = JSON.parse(sessionStorage.getItem('jwt'));
+            auth.user = user;
+            sessionStorage.setItem('jwt', JSON.stringify(auth));
+            cb();
+        }
+    }
+};
+
 const isAuthenticated = () => {
     if (typeof window === 'undefined') {
         return false;
@@ -31,5 +42,5 @@ const clearJWT = (cb) => {
 };
 
 export default {
-    authenticate, isAuthenticated, clearJWT
+    authenticate, isAuthenticated, clearJWT, updateUser
 };

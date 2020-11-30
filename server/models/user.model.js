@@ -30,6 +30,10 @@ const UserSchema = mongoose.Schema({
     photo: {
         data: Buffer,
         contentType: String
+    },
+    educator: {
+        type: Boolean,
+        default: false
     }
 });
 
