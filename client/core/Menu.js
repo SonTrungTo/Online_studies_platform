@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import auth from "../auth/auth-helper";
 import { Link, withRouter } from "react-router-dom";
+import LocalLibrary from "@material-ui/icons/LocalLibrary";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -46,6 +47,16 @@ const Menu = withRouter(({history}) => {
                     <Typography variant="h6" className={ classes.title }>
                         SONSERA
                     </Typography>
+                    { auth.isAuthenticated() &&
+                    <span>
+                        { auth.isAuthenticated().user.educator &&
+                        <Link to="/teach/courses">
+                            <Button style={ isActive(history, "/teach/courses") }
+                            variant="contained" color="secondary">
+                                <LocalLibrary /> Teach
+                            </Button>
+                        </Link> }
+                    </span> }
                     <Link to="/users">
                         <Button style={ isActive(history, "/users") }>
                             Users

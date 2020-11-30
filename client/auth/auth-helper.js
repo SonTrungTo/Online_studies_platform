@@ -11,7 +11,12 @@ const updateUser = (user, cb) => {
     if (typeof window !== 'undefined') {
         if (sessionStorage.getItem('jwt')) {
             const auth = JSON.parse(sessionStorage.getItem('jwt'));
-            auth.user = user;
+            auth.user = {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                educator: user.educator
+            };
             sessionStorage.setItem('jwt', JSON.stringify(auth));
             cb();
         }

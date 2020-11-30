@@ -118,7 +118,7 @@ export default function EditProfile() {
         && form.append('retypePassword', profileUser.retypePassword);
         profileUser.about && form.append('about', profileUser.about);
         profileUser.photo && form.append('photo', profileUser.photo);
-        profileUser.educator && form.append('educator', profileUser.educator);
+        form.append('educator', profileUser.educator);
 
         update({
             userId: jwt.user._id
