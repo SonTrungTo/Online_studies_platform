@@ -90,6 +90,16 @@ const defaultPhoto = (req, res) => {
     return res.sendFile(process.cwd()+defaultUser);
 };
 
+const isEducator = (req, res, next) => {
+    const isEducator = req.profile && req.profile.educator;
+    if (!isEducator) {
+        return res.status(403).json({
+            error: 'User is not an educator'
+        });
+    }
+    next();
+};
+
 const userById = async (req, res, next, id) => {
     try {
         const user = await User.findById(id);
@@ -109,5 +119,5 @@ const userById = async (req, res, next, id) => {
 
 export default {
     list, create, userById, read, update, remove, photo,
-    defaultPhoto
+    defaultPhoto, isEducator
 };

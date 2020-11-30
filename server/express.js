@@ -8,6 +8,7 @@ import cors from "cors";
 import Template from "../template";
 import userRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
+import courseRoutes from "./routes/course.routes";
 
 // Codes for development phase
 import path from "path";
@@ -35,6 +36,7 @@ app.use(helmet());
 app.use(cors());
 app.use("/", userRoutes);
 app.use("/", authRoutes);
+app.use("/", courseRoutes);
 
 app.use((err, req, res, next) => {
     if (err.name === "UnauthorizedError") {
