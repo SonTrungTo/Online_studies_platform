@@ -19,7 +19,6 @@ const list = async (credentials, signal) => {
         const response = await fetch('/api/users', {
             method: 'GET',
             headers: {
-                'Content-Type': "application/json",
                 'Accept': "application/json",
                 'Authorization': 'Bearer ' + credentials.t
             },
@@ -36,7 +35,6 @@ const read = async (params, credentials, signal) => {
         const response = await fetch('/api/users/' + params.userId, {
             method: 'GET',
             headers: {
-                'Content-Type': "application/json",
                 'Accept': "application/json",
                 'Authorization': 'Bearer ' + credentials.t
             },
@@ -69,7 +67,6 @@ const remove = async (params, credentials) => {
         const response = await fetch('/api/users/' + params.userId, {
             method: 'DELETE',
             headers: {
-                'Content-Type': "application/json",
                 'Accept': "application/json",
                 'Authorization': "Bearer " + credentials.t
             }

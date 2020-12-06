@@ -14,6 +14,22 @@ const create = async (params, credentials, course) => {
     }
 };
 
+const listByInstructor = async (params, credentials, signal) => {
+    try {
+        const response = await fetch('/api/courses/by/' + params.userId, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + credentials.t
+            },
+            signal: signal
+        });
+        return await response.json();
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 export {
-    create
+    create, listByInstructor
 };

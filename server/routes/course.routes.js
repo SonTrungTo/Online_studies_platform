@@ -7,7 +7,9 @@ const router = express.Router();
 
 router.route('/api/courses/by/:userId')
     .post(authCtrl.requireSignin, authCtrl.hasAuthorization,
-        userCtrl.isEducator, courseCtrl.create);
+        userCtrl.isEducator, courseCtrl.create)
+    .get(authCtrl.requireSignin, authCtrl.hasAuthorization,
+        courseCtrl.listByInstructor);
 
 router.route('/api/courses/by/:courseId')
     .get(courseCtrl.getCourseImage);

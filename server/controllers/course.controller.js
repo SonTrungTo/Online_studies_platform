@@ -29,6 +29,19 @@ const create = async (req, res) => {
     });
 };
 
+const listByInstructor = async (req, res) => {
+    try {
+        let courses = await Course.find({ instructor: req.profile._id })
+        .populate('instructor', '_id name')
+        .exec();
+        return res.status(200).json(courses);
+    } catch (err) {
+        return res.status(400).json({
+            error: dbErrorHandler.getErrorMessage(err)
+        });
+    }
+};
+
 const getCourseImage = (req, res) => {
     res.set('Content-Type', req.course.image.contentType);
     return res.send(req.course.image.data);
@@ -54,5 +67,5 @@ const courseById = async (req, res, next, id) => {
 };
 
 export default {
-    create, getCourseImage, courseById
+    create, listByInstructor, getCourseImage, courseById
 };
