@@ -8,6 +8,7 @@ import Profile from "./user/Profile";
 import EditProfile from "./user/EditProfile";
 import Home from "./core/Home";
 import Menu from "./core/Menu";
+import NewCourse from "./course/NewCourse";
 
 const MainRouter = () =>
     <div>
@@ -19,6 +20,7 @@ const MainRouter = () =>
             <PrivateRoute path="/users" component={ Users } />
             <PrivateRoute path="/user/edit/:userId" component={ EditProfile } />
             <PrivateRoute path="/user/:userId" component={ Profile } />
+            <PrivateRoute path="/teach/course/new" component={ NewCourse } />
         </Switch>
     </div>
 

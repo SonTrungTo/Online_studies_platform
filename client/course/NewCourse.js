@@ -36,8 +36,7 @@ const useStyles = makeStyles(theme => ({
         "&:hover": {
             backgroundColor: theme.palette.openTitle
         },
-        color: theme.palette.primary.contrastText,
-        marginTop: theme.spacing(2)
+        color: theme.palette.primary.contrastText
     },
     fileInput: {
         display: 'none'
@@ -58,7 +57,8 @@ const useStyles = makeStyles(theme => ({
     },
     listOfButtons: {
         display: 'flex',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between',
+        marginTop: theme.spacing(5)
     }
 }));
 
@@ -97,10 +97,13 @@ export default function NewCourse() {
         });
     };
 
-    {  }
+    const { redirect } = values;
+    if ( redirect ) {
+        return <Redirect to="/teach/courses" />;
+    }
 
     return (
-        <Card>
+        <Card className={ classes.card }>
             <CardContent>
                 <Typography variant="h6" className={ classes.title }>
                     New Course
@@ -120,17 +123,23 @@ export default function NewCourse() {
                     <div className={ classes.fileName }>
                         { values.image ? values.image.name : "" }
                     </div>
+                    <br />
                     <TextField label='Name' margin='normal'
                     value={ values.name } onChange={ handleChange('name') }
                     id="name" />
+                    <br />
                     <TextField label='Description' margin='normal'
                     value={ values.description }
                     onChange={ handleChange('description') }
-                    id="description" />
+                    id="description"
+                    multiline
+                    rows="2" />
+                    <br />
                     <TextField label='Category' margin='normal'
                     value={ values.category }
                     onChange={ handleChange('category') }
                     id="category" />
+                    <br />
                 </div>
                 { values.error &&
                 <Typography component="p" color="error">
@@ -139,19 +148,17 @@ export default function NewCourse() {
                     </Icon>
                     { values.error }
                 </Typography> }
-                <CardActions>
-                    <div className={ classes.listOfButtons }>
-                        <Link to="/teach/courses">
-                            <Button variant="contained"
-                            color="primary">
-                                Cancel
-                            </Button>
-                        </Link>
-                        <Button variant="contained" className={ classes.submit }
-                        onClick={ clickSubmit }>
-                            Submit
+                <CardActions className={ classes.listOfButtons }>
+                    <Link to="/teach/courses">
+                        <Button variant="contained"
+                        color="primary">
+                            Cancel
                         </Button>
-                    </div>
+                    </Link>
+                    <Button variant="contained" className={ classes.submit }
+                    onClick={ clickSubmit }>
+                        Submit
+                    </Button>
                 </CardActions>
             </CardContent>
         </Card>

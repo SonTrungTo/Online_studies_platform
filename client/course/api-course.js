@@ -14,6 +14,6 @@ const create = async (params, credentials, course) => {
     }
 };
 
-export default {
+export {
     create
 };
