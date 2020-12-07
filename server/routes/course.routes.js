@@ -14,6 +14,9 @@ router.route('/api/courses/by/:userId')
 router.route('/api/courses/photo/:courseId')
     .get(courseCtrl.getCourseImage);
 
+router.route('/api/courses/:courseId')
+    .get(courseCtrl.read);
+
 router.param('userId', userCtrl.userById);
 router.param('courseId', courseCtrl.courseById);
 

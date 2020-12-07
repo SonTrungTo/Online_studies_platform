@@ -42,6 +42,11 @@ const listByInstructor = async (req, res) => {
     }
 };
 
+const read = async (req, res) => {
+    req.course.image = undefined;
+    return res.status(200).json(req.course);
+};
+
 const getCourseImage = (req, res) => {
     res.set('Content-Type', req.course.image.contentType);
     return res.send(req.course.image.data);
@@ -67,5 +72,6 @@ const courseById = async (req, res, next, id) => {
 };
 
 export default {
-    create, listByInstructor, getCourseImage, courseById
+    create, listByInstructor, getCourseImage, read,
+    courseById
 };
