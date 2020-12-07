@@ -49,6 +49,11 @@ const useStyles = makeStyles(theme => ({
     },
     chip: {
         marginTop: theme.spacing(1)
+    },
+    action: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginRight: theme.spacing(2)
     }
 }));
 
@@ -108,9 +113,11 @@ export default function Course( props ) {
                 <React.Fragment>
                     { auth.isAuthenticated().user &&
                     auth.isAuthenticated().user._id === course.instructor._id &&
-                    <span>
-                        <Link>
-                        
+                    <span className={ classes.action }>
+                        <Link to={ "/teach/course/edit/" + course._id }>
+                            <IconButton color="secondary" aria-label="Edit">
+                                <Edit />
+                            </IconButton>
                         </Link>
                     </span>
                     }
