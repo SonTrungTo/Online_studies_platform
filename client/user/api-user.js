@@ -30,13 +30,12 @@ const list = async (credentials, signal) => {
     }
 };
 
-const read = async (params, credentials, signal) => {
+const read = async (params, signal) => {
     try {
         const response = await fetch('/api/users/' + params.userId, {
             method: 'GET',
             headers: {
-                'Accept': "application/json",
-                'Authorization': 'Bearer ' + credentials.t
+                'Accept': "application/json"
             },
             signal: signal
         });

@@ -51,7 +51,7 @@ export default function Profile(props) {
 
         read({
             userId: props.match.params.userId
-        }, {t: jwt.token}, signal).then(data => {
+        }, signal).then(data => {
             if (data.error) {
                 console.log(data.error);
                 setValues({...values, error: data.error});

@@ -14,7 +14,7 @@ router.route("/api/users/defaultPhoto")
     .get(userCtrl.defaultPhoto);
 
 router.route("/api/users/:userId")
-    .get(authCtrl.requireSignin, userCtrl.read)
+    .get(userCtrl.read)
     .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
     .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove);
 
