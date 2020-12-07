@@ -11,7 +11,7 @@ router.route('/api/courses/by/:userId')
     .get(authCtrl.requireSignin, authCtrl.hasAuthorization,
         courseCtrl.listByInstructor);
 
-router.route('/api/courses/by/:courseId')
+router.route('/api/courses/photo/:courseId')
     .get(courseCtrl.getCourseImage);
 
 router.param('userId', userCtrl.userById);
