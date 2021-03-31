@@ -37,7 +37,7 @@ const Menu = withRouter(({history}) => {
         <div className={ classes.root }>
             <AppBar position="static">
                 <Toolbar>
-                    <Link to="/">
+                    <Link to="/" style={{ textDecorationLine: 'none' }}>
                         <IconButton style={ isActive(history, "/") }
                         className={ classes.homeButton }
                         edge="start" aria-label="Home" color="inherit">
@@ -50,26 +50,26 @@ const Menu = withRouter(({history}) => {
                     { auth.isAuthenticated() &&
                     <span>
                         { auth.isAuthenticated().user.educator &&
-                        <Link to="/teach/courses">
+                        <Link to="/teach/courses" style={{ textDecorationLine: 'none' }}>
                             <Button style={ isActive(history, "/teach/courses") }
                             variant="contained" color="secondary">
                                 <LocalLibrary /> Teach
                             </Button>
                         </Link> }
                     </span> }
-                    <Link to="/users">
+                    <Link to="/users" style={{ textDecorationLine: 'none' }}>
                         <Button style={ isActive(history, "/users") }>
                             Users
                         </Button>
                     </Link>
                     { !auth.isAuthenticated() && (
                         <span>
-                            <Link to="/signin">
+                            <Link to="/signin" style={{ textDecorationLine: 'none' }}>
                                 <Button style={ isActive(history, "/signin") }>
                                     Sign In
                                 </Button>
                             </Link>
-                            <Link to="/signup">
+                            <Link to="/signup" style={{ textDecorationLine: 'none' }}>
                                 <Button style={ isActive(history, "/signup") }>
                                     Sign Up
                                 </Button>
@@ -79,7 +79,7 @@ const Menu = withRouter(({history}) => {
                     { auth.isAuthenticated() && (
                         <span>
                             <Link to={ "/user/" +
-                        auth.isAuthenticated().user._id }>
+                        auth.isAuthenticated().user._id } style={{ textDecorationLine: 'none' }}>
                                 <Button style={ isActive(history, 
                         `/user/${auth.isAuthenticated().user._id}`) }>
                                     Profile

@@ -9,6 +9,7 @@ import Template from "../template";
 import userRoutes from "./routes/user.routes";
 import authRoutes from "./routes/auth.routes";
 import courseRoutes from "./routes/course.routes";
+import config from "../config/config";
 
 // Codes for development phase
 import path from "path";
@@ -26,7 +27,7 @@ const app = express();
 const CURRENT_WORKING_DIR = process.cwd();
 
 app.use("/dist", express.static(path.join(CURRENT_WORKING_DIR, "dist")));
-devBundle.compile(app); // Comment out when in production
+config.env === 'development' &&  devBundle.compile(app);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -67,7 +68,7 @@ app.get("*", (req, res) => {
         return res.redirect(303, context.url);
     }
     const css = sheets.toString();
-    return res.status(200).send(Template({
+    return  res.status(200).send(Template({
         markup: markup,
         css: css
     }));
