@@ -27,4 +27,4 @@ jobs:
           heroku_app_name: 'sonsera'
           heroku_email: 'son.trung.to@gmail.com'
         env:
-          MONGO_URI: ${{ secrets.MONGODB_URI }}
+          HD_MONGO_URI: ${{ secrets.MONGODB_URI }}
