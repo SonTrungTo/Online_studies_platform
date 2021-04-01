@@ -10,7 +10,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         trim: true,
         unique: "Email already exists",
-        match: [/.+\@.+\..+/, "Please fill in a valid email address"],
+        match: [/.+@.+\..+/, "Please fill in a valid email address"],
         required: "Email is required"
     },
     created: {
@@ -77,7 +77,7 @@ UserSchema.methods = {
     }
 };
 
-UserSchema.path('hashed_password').validate(function (v) {
+UserSchema.path('hashed_password').validate(function (_v) {
    const password_pattern =
    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!#%/?$@&=]).{8,}$/;
    if (this._password && !password_pattern.test(this._password)) {

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+//import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import { makeStyles } from "@material-ui/core/styles";
 import { read } from "./api-course";
 import Icon from "@material-ui/core/Icon";
 import Error from "@material-ui/icons/Error";
-import CardActionArea from "@material-ui/core/CardActionArea";
+//import CardActionArea from "@material-ui/core/CardActionArea";
 import IconButton from "@material-ui/core/IconButton";
-import Delete from "@material-ui/icons/Delete";
+//import Delete from "@material-ui/icons/Delete";
 import Edit from "@material-ui/icons/Edit";
 import { Link } from "react-router-dom";
 import Chip from "@material-ui/core/Chip";
@@ -143,4 +143,4 @@ export default function Course( props ) {
             <Divider />
         </Card>
     );
-};
+}

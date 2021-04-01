@@ -116,4 +116,4 @@ export default function Users() {
             </List>
         </Paper>
     );
-};
+}

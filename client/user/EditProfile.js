@@ -37,7 +37,7 @@ const useStyles = makeStyles(theme => ({
         width: 200,
         height: 200
     },
-    fileInput: {
+    fileInput: {
         display: 'none'
     },
     uploadButton: {

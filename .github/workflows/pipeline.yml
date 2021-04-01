@@ -1,0 +1,30 @@
+name: Deployment pipeline(for exercise 11.21 + 11.22 from FS2020_Helsinki)
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run lint
+      - name: heroku deployment
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'sonsera'
+          heroku_email: 'son.trung.to@gmail.com'
+        env:
+          MONGO_URI: ${{ secrets.MONGODB_URI }}

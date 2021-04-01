@@ -39,7 +39,7 @@ app.use("/", userRoutes);
 app.use("/", authRoutes);
 app.use("/", courseRoutes);
 
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
     if (err.name === "UnauthorizedError") {
         return res.status(401).json({
             error: err.name + ': ' + err.message

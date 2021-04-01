@@ -33,20 +33,20 @@ export default function DeleteProfile(props) {
     const [errorMessage, setErrorMessage] = useState('');
     const jwt = auth.isAuthenticated();
 
-    const clickOpen = event => {
+    const clickOpen = _event => {
         setOpen(true);
     };
 
-    const clickClose = event => {
+    const clickClose = _event => {
         setOpen(false);
     };
 
-    const clickOpenSecondary = event => {
+    const clickOpenSecondary = _event => {
         setOpenSecondary(false);
         props.history.push("/");
     };
 
-    const clickDelete = id => event => {
+    const clickDelete = id => _event => {
         remove({
             userId: id
         }, {t: jwt.token}).then(data => {
@@ -111,4 +111,4 @@ export default function DeleteProfile(props) {
             </Dialog>
         </span>
     );
-};
+}
